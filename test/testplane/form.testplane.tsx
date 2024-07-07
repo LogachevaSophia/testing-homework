@@ -31,6 +31,7 @@ describe("Форма:", function () {
     it("форма проходит валидацию если введеные корректные данные", async function () {
         //bug_id = 8 (с окошком success беды)
         //bug_id = 10 (с телефоном беды)
+        //bug_id = 2 (беды с id заказа)
       await this.browser.setWindowSize(480, 2000);
       await this.browser.url(path);
   
