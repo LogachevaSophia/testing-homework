@@ -1,7 +1,31 @@
-describe('github', function() {
-    it('should check repository name', async ({ browser }) => {
-        await browser.url('https://github.com/gemini-testing/testplane');
+describe('Функциональные требования', function () {
+    const test_url = 'http://localhost:3000/hw/store/'
+   
+    describe('Страницы:', function () {
 
-        await expect(browser.$('#readme h1')).toHaveText('Testplane (ex-Hermione)');
-    });
+        it('в магазине должны быть страницы: главная, каталог, условия доставки, контакты', async ({browser}) => {
+            //подготовка
+            await browser.url(test_url);
+
+            const expectedPages = ['Catalog', 'Delivery', 'Contacts'];
+
+            const linkElements = await browser.$$('.navbar-nav .nav-link');
+            const links = await Promise.all(linkElements.map(async (el) => {
+                const text = await el.getText();
+                return text.trim(); // Удаляем лишние пробелы вокруг текста ссылки
+            }));
+
+            //действия
+
+            //проверка
+            expectedPages.forEach(expectedPage => {
+                expect(links).toContain(expectedPage);
+            });
+        })
+        it('страницы главная, условия доставки, контакты должны иметь статическое содержимое', async ({browser})=>{
+
+        })
+
+    })
+
 });
